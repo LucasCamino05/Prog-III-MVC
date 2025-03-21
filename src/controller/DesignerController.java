@@ -1,10 +1,13 @@
 package controller;
 
 import exceptions.IsEmptyException;
+import exceptions.UserNotFound;
 import exceptions.emptyException;
 import exceptions.UserAlreadyCreated;
 import model.Designer;
 import model.DesignerRepository;
+
+import java.util.Scanner;
 
 public class DesignerController {
 
@@ -27,5 +30,8 @@ public class DesignerController {
     }
     public void showDesigners() throws IsEmptyException {
         repository.showDesigners();
+    }
+    public void modificarDesigners(Scanner input) throws UserNotFound{
+        repository.modifyDeveloper(input);
     }
 }

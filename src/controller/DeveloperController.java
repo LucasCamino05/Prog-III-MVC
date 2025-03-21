@@ -1,10 +1,13 @@
 package controller;
 
 import exceptions.IsEmptyException;
+import exceptions.UserNotFound;
 import exceptions.emptyException;
 import exceptions.UserAlreadyCreated;
 import model.Developer;
 import model.DeveloperRepository;
+
+import java.util.Scanner;
 
 public class DeveloperController {
     private DeveloperRepository repository;
@@ -27,7 +30,7 @@ public class DeveloperController {
     public void showDevelopers()throws IsEmptyException{
         repository.showDevelopers();
     }
-    public void modificarDeveloper(){
-        repository.modifyDeveloper();
+    public void modificarDeveloper(Scanner input) throws UserNotFound {
+        repository.modifyDeveloper(input);
     }
 }

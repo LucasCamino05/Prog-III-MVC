@@ -25,9 +25,10 @@ public class DeveloperRepository {
         developers.remove(o);
     }
 
-    public int modifyDeveloper() throws UserNotFound{
-        Scanner input = new Scanner(System.in);
+    public int modifyDeveloper(Scanner input) throws UserNotFound{
         Integer value = input.nextInt();
+        input.nextLine();
+
         for(Developer i: developers){
             if(i.getId() == value){
                 i.setEdad(modifyEdad(input));
@@ -36,7 +37,6 @@ public class DeveloperRepository {
                 return 1;
             }
         }
-        input.close();
         throw new UserNotFound();
     }
     public void showDevelopers() throws IsEmptyException {

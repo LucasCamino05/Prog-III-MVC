@@ -26,8 +26,10 @@ public class DesignerRepository {
         designers.remove(o);
     }
 
-    public int modifyDeveloper(Integer value) throws UserNotFound{
-        Scanner input = new Scanner(System.in);
+    public int modifyDeveloper(Scanner input) throws UserNotFound{
+        Integer value = input.nextInt();
+        input.nextLine();
+
         for(Designer i: designers){
             if(i.getId() == value){
                 i.setEdad(modifyEdad(input));
@@ -36,7 +38,7 @@ public class DesignerRepository {
                 return 1;
             }
         }
-        input.close();
+
         throw new UserNotFound();
     }
     public void showDesigners() throws IsEmptyException {
@@ -52,6 +54,7 @@ public class DesignerRepository {
         System.out.println("Ingrese el nuevo nombre: ");
         return input.nextLine();
     }
+
     public int modifyEdad(Scanner input){
         System.out.println("Ingrese la Edad: ");
         int value = input.nextInt();

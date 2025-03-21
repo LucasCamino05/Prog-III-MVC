@@ -2,6 +2,7 @@ package view;
 
 import controller.DeveloperController;
 import exceptions.IsEmptyException;
+import exceptions.UserNotFound;
 import exceptions.emptyException;
 import exceptions.UserAlreadyCreated;
 
@@ -31,7 +32,7 @@ public class DeveloperView {
     public void mostrarDevelopers() throws IsEmptyException {
         controlador.showDevelopers();
     }
-    public void modificarDeveloper(){
-        controlador.modificarDeveloper();
+    public void modificarDeveloper(Scanner input) throws UserNotFound {
+        controlador.modificarDeveloper(input);
     }
 }

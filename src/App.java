@@ -1,5 +1,6 @@
 import exceptions.IsEmptyException;
 import exceptions.UserAlreadyCreated;
+import exceptions.UserNotFound;
 import exceptions.emptyException;
 import view.DesignerView;
 import view.DeveloperView;
@@ -8,7 +9,7 @@ import java.util.Scanner;
 
 public class App {
 
-    public static void __init(DeveloperView developerView, DesignerView designerView) throws IsEmptyException, UserAlreadyCreated, emptyException {
+    public static void __init(DeveloperView developerView, DesignerView designerView) throws IsEmptyException, UserAlreadyCreated, emptyException, UserNotFound {
         Scanner input = new Scanner(System.in);
         int salir;
         int opcion;
@@ -34,10 +35,10 @@ public class App {
                     designerView.mostrarDesigners();
                     break;
                 case 6:
-                    developerView.modificarDeveloper();
+                    developerView.modificarDeveloper(input);
                     break;
                 case 7:
-                    designerView.modificarDesigner();
+                    designerView.modificarDesigner(input);
                     break;
             }
             System.out.println("Desea continuar? Si(1) - No(0)");

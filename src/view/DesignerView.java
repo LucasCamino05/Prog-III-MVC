@@ -3,6 +3,7 @@ package view;
 import controller.DesignerController;
 import exceptions.IsEmptyException;
 import exceptions.UserAlreadyCreated;
+import exceptions.UserNotFound;
 import exceptions.emptyException;
 
 import java.util.Scanner;
@@ -31,7 +32,7 @@ public class DesignerView {
     public void mostrarDesigners() throws IsEmptyException {
         controller.showDesigners();
     }
-    public void modificarDesigner(){
-        controller.modificarDesigner():
+    public void modificarDesigner(Scanner input) throws UserNotFound {
+        controller.modificarDesigners(input);
     }
 }
