@@ -1,0 +1,31 @@
+package controller;
+
+import exceptions.IsEmptyException;
+import exceptions.emptyException;
+import exceptions.UserAlreadyCreated;
+import model.Designer;
+import model.DesignerRepository;
+
+public class DesignerController {
+
+    private DesignerRepository repository;
+
+    public DesignerController(DesignerRepository repo){
+        this.repository = repo;
+    }
+
+    public void addDesigner(String nombre,Integer edad, String DNI) throws emptyException, UserAlreadyCreated {
+        validarNombreVacio(nombre);
+        Designer designer = new Designer(nombre,edad,DNI);
+        repository.guardarRepositorio(designer);
+    }
+
+    public void validarNombreVacio(String name) throws emptyException{
+        if(name.trim().isEmpty()){
+            throw new emptyException("El nombre no puede estar vacio");
+        }
+    }
+    public void showDesigners() throws IsEmptyException {
+        repository.showDesigners();
+    }
+}
