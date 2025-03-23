@@ -5,7 +5,6 @@ import exceptions.UserAlreadyCreated;
 import exceptions.UserNotFound;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
 public class DeveloperRepository {
     List<Developer> developers = new ArrayList<>();
@@ -21,60 +20,55 @@ public class DeveloperRepository {
         }
     }
 
-    public void remove(int id){
-        int index = findIndexById(id);
-        developers.remove(index);
-    }
-    public void remove(Developer o){
-        developers.remove(o);
-    }
-
-    public int modifyDeveloper(Scanner input) {
-        Integer value = input.nextInt();
-        input.nextLine();
-        try {
-            for (Developer i : developers) {
-                if (i.getId() == value) {
-                    i.setEdad(modifyEdad(input));
-                    input.nextLine();
-                    i.setNombre(modifyName(input));
-                    return 1;
-                }
-            }
-            throw new UserNotFound();
-        }catch (UserNotFound e){
-            e.printStackTrace();
+    public void removeRepository(String DNi){
+        int index = findIndexById(DNi);
+        if(index == -1){
+            System.out.println("Usuario inexistente.");
         }
-        return 0;
+        else{
+            developers.remove(index);
+        }
     }
 
-    public void showDevelopers() {
-        try {
-            if(developers.isEmpty()){
-                throw new IsEmptyException();
-            }
+    public void modifyDeveloper(String DNI,String nombre) throws UserNotFound{
+        int index = findIndexById(DNI);
+        if(index != -1){
+            developers.get(index).setNombre(nombre);
+        }
+        throw new UserNotFound();
+    }
+
+    public void modifyDeveloper(String DNI,Integer edad) throws UserNotFound{
+        int index = findIndexById(DNI);
+        if(index != -1){
+            developers.get(index).setEdad(edad);
+        }
+        throw new UserNotFound();
+    }
+
+    public void modifyDeveloper(String DNI,String nombre,Integer edad) throws UserNotFound{
+        int index = findIndexById(DNI);
+        if(index != -1){
+            developers.get(index).setNombre(nombre);
+            developers.get(index).setEdad(edad);
+        }
+        throw new UserNotFound();
+    }
+    public void showDevelopers() throws IsEmptyException{
+        if(developers.isEmpty()){
+            throw new IsEmptyException();
+        }
+        else{
             for(Developer i : developers){
                 System.out.println(i.toString());
             }
-        }catch (IsEmptyException e){
-            e.printStackTrace();
         }
-
     }
 
-    public String modifyName(Scanner input){
-        System.out.println("Ingrese el nuevo nombre: ");
-        return input.nextLine();
-    }
-    public int modifyEdad(Scanner input){
-        System.out.println("Ingrese la Edad: ");
-        int value = input.nextInt();
-        return value;
-    }
-
-    public int findIndexById(int id){
+    // Busco el INDEX del DNI que quiero eliminar.
+    public int findIndexById(String DNI){
         for (int i=0; i<developers.size(); i++){
-            if(developers.get(i).getId() == id){
+            if(developers.get(i).getDNI().compareTo(DNI) == 0){
                 return i;
             }
         }

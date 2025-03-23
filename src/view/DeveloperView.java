@@ -1,10 +1,7 @@
 package view;
 
 import controller.DeveloperController;
-import exceptions.IsEmptyException;
 import exceptions.UserNotFound;
-import exceptions.emptyException;
-import exceptions.UserAlreadyCreated;
 
 import java.util.Scanner;
 
@@ -16,23 +13,49 @@ public class DeveloperView {
         this.controlador = controler;
         this.input = new Scanner(System.in);
     }
-    public void crearNuevoUsuario() throws emptyException, UserAlreadyCreated {
-        System.out.println("Ingrese el nombre del nuevo usuario: ");
-        String nombre = input.nextLine();
-
-        System.out.println("Ingrese la edad: ");
-        Integer edad = input.nextInt();
-        input.nextLine();
-
-        System.out.println("Ingrese el DNI del usuario: ");
-        String DNI = input.nextLine();
+    public void crearNuevoUsuario(){
+        String nombre = enterName();
+        Integer edad = enterAge();
+        String DNI = enterDNI();
 
         controlador.addDeveloper(nombre,edad,DNI);
     }
-    public void mostrarDevelopers() throws IsEmptyException {
+    public void mostrarDevelopers(){
         controlador.showDevelopers();
     }
-    public void modificarDeveloper(Scanner input) throws UserNotFound {
-        controlador.modificarDeveloper(input);
+
+    public void modificarDeveloper(int opcion){
+        System.out.println("Ingrese el DNI: ");
+        String DNI = enterDNI();
+
+        if (opcion == 1) {
+            String nombre = enterName();
+            controlador.modificarDeveloper(DNI, nombre);
+        } else if (opcion == 2) {
+            Integer edad = enterAge();
+            controlador.modificarDeveloper(DNI, edad);
+        } else {
+            String nombre = enterName();
+            Integer edad = enterAge();
+            controlador.modificarDeveloper(DNI, nombre, edad);
+        }
+    }
+
+    public String enterName(){
+        System.out.println("Ingrese el nuevo nombre: ");
+        return input.nextLine();
+    }
+
+    public String enterDNI(){
+        System.out.println("Ingrese el DNI del usuario: ");
+        return input.nextLine();
+    }
+
+    public int enterAge(){
+        System.out.println("Ingrese la Edad: ");
+        int value = input.nextInt();
+        input.nextLine();
+
+        return value;
     }
 }

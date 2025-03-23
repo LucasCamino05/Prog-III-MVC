@@ -1,10 +1,7 @@
 package view;
 
 import controller.DesignerController;
-import exceptions.IsEmptyException;
-import exceptions.UserAlreadyCreated;
-import exceptions.UserNotFound;
-import exceptions.emptyException;
+
 
 import java.util.Scanner;
 
@@ -16,7 +13,7 @@ public class DesignerView {
         this.controller = controller;
         this.input = new Scanner(System.in);
     }
-    public void crearNuevoUsuario() throws emptyException, UserAlreadyCreated {
+    public void crearNuevoUsuario(){
         System.out.println("Ingrese el nombre del nuevo usuario: ");
         String nombre = input.nextLine();
 
@@ -29,10 +26,13 @@ public class DesignerView {
 
         controller.addDesigner(nombre,edad,DNI);
     }
-    public void mostrarDesigners() throws IsEmptyException {
+    public void mostrarDesigners(){
         controller.showDesigners();
     }
-    public void modificarDesigner(Scanner input) throws UserNotFound {
-        controller.modificarDesigners(input);
+    public void modificarDesigner(Scanner input){
+        System.out.println("Ingrese el DNI: ");
+        String DNI = input.nextLine();
+
+        controller.modifyDesigner(input,DNI);
     }
 }

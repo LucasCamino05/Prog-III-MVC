@@ -31,13 +31,10 @@ public class DesignerRepository {
         designers.remove(o);
     }
 
-    public int modifyDeveloper(Scanner input){
-        Integer value = input.nextInt();
-        input.nextLine();
-
+    public int modifyDesigner(Scanner input,String DNI){
         try{
             for (Designer i : designers) {
-                if (i.getId() == value) {
+                if (i.getDNI().compareTo(DNI) == 0) {
                     i.setEdad(modifyEdad(input));
                     input.nextLine();
                     i.setNombre(modifyName(input));

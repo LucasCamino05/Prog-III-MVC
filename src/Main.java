@@ -1,9 +1,5 @@
 import controller.DesignerController;
 import controller.DeveloperController;
-import exceptions.emptyException;
-import exceptions.IsEmptyException;
-import exceptions.UserAlreadyCreated;
-import exceptions.UserNotFound;
 import model.DesignerRepository;
 import model.DeveloperRepository;
 import view.DesignerView;
@@ -11,7 +7,7 @@ import view.DeveloperView;
 
 
 public class Main {
-    public static void main(String[] args) throws UserNotFound, IsEmptyException, UserAlreadyCreated, emptyException {
+    public static void main(String[] args){
         DeveloperRepository developerRepository = new DeveloperRepository();
         DeveloperView developerView = new DeveloperView(new DeveloperController(developerRepository));
         DesignerRepository designerRepository = new DesignerRepository();

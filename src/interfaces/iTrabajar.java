@@ -1,6 +1,6 @@
 package interfaces;
 
 public interface iTrabajar {
-    public void trabajando();
+    void trabajando();
     void descansando();
 }

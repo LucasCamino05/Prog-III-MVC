@@ -1,18 +1,31 @@
 package model;
 
 public class Designer extends Trabajador{
-    private Integer id_Designer;
+    private Project project;
 
     // CONSTRUCTORES
 
     public Designer(String nombre, Integer edad,String DNI) {
         super(nombre,edad,DNI);
+        this.project = new Project();
+    }
+
+    // GETTER Y SETTER
+
+    public String getProject() {
+        return project.toString();
+    }
+
+    public void setProject(String projectName, String projectDescription) {
+        this.project.setDescripcion(projectDescription);
+        this.project.setNombre(projectName);
     }
 
     // toString Override
     @Override
     public String toString() {
         return "Designer" +
-                "\n" + super.toString();
+                "\n" + super.toString() +
+                "\n" + this.getProject();
     }
 }

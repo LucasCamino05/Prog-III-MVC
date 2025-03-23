@@ -8,6 +8,7 @@ public class Trabajador implements iTrabajar {
     private String nombre;
     private Integer edad;
     private String DNI;
+
     // CONSTRUCTORES
     public Trabajador(String nombre, Integer edad,String DNI) {
         this.id = ID++ ;
@@ -41,6 +42,14 @@ public class Trabajador implements iTrabajar {
 
     public void setEdad(Integer edad) {
         this.edad = edad;
+    }
+
+    public String getDNI() {
+        return DNI;
+    }
+
+    public void setDNI(String DNI) {
+        this.DNI = DNI;
     }
 
     // toSTring Override
