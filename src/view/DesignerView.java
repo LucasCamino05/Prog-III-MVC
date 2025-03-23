@@ -16,7 +16,7 @@ public class DesignerView {
         this.controller = controller;
         this.input = new Scanner(System.in);
     }
-    public void crearNuevoUsuario() throws emptyException, UserAlreadyCreated {
+    public void crearNuevoUsuario(){
         System.out.println("Ingrese el nombre del nuevo usuario: ");
         String nombre = input.nextLine();
 
@@ -29,10 +29,10 @@ public class DesignerView {
 
         controller.addDesigner(nombre,edad,DNI);
     }
-    public void mostrarDesigners() throws IsEmptyException {
+    public void mostrarDesigners(){
         controller.showDesigners();
     }
-    public void modificarDesigner(Scanner input) throws UserNotFound {
+    public void modificarDesigner(Scanner input){
         controller.modificarDesigners(input);
     }
 }

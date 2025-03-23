@@ -17,7 +17,7 @@ public class DesignerController {
         this.repository = repo;
     }
 
-    public void addDesigner(String nombre,Integer edad, String DNI) throws emptyException, UserAlreadyCreated {
+    public void addDesigner(String nombre,Integer edad, String DNI){
         validarNombreVacio(nombre);
         Designer designer = new Designer(nombre,edad,DNI);
         repository.guardarRepositorio(designer);
@@ -32,10 +32,10 @@ public class DesignerController {
             e.printStackTrace();
         }
     }
-    public void showDesigners() throws IsEmptyException {
+    public void showDesigners(){
         repository.showDesigners();
     }
-    public void modificarDesigners(Scanner input) throws UserNotFound{
+    public void modificarDesigners(Scanner input){
         repository.modifyDeveloper(input);
     }
 }

@@ -16,7 +16,7 @@ public class DeveloperController {
         this.repository = repo;
     }
 
-    public void addDeveloper(String nombre, Integer edad, String DNI) throws UserAlreadyCreated {
+    public void addDeveloper(String nombre, Integer edad, String DNI){
         validarNombreVacio(nombre);
         Developer developer = new Developer(nombre,edad,DNI);
         repository.guardarRepositorio(developer);
@@ -31,10 +31,10 @@ public class DeveloperController {
             e.printStackTrace();
         }
     }
-    public void showDevelopers()throws IsEmptyException{
+    public void showDevelopers(){
         repository.showDevelopers();
     }
-    public void modificarDeveloper(Scanner input) throws UserNotFound {
+    public void modificarDeveloper(Scanner input){
         repository.modifyDeveloper(input);
     }
 }

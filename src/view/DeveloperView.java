@@ -16,7 +16,7 @@ public class DeveloperView {
         this.controlador = controler;
         this.input = new Scanner(System.in);
     }
-    public void crearNuevoUsuario() throws emptyException, UserAlreadyCreated {
+    public void crearNuevoUsuario(){
         System.out.println("Ingrese el nombre del nuevo usuario: ");
         String nombre = input.nextLine();
 
@@ -29,10 +29,10 @@ public class DeveloperView {
 
         controlador.addDeveloper(nombre,edad,DNI);
     }
-    public void mostrarDevelopers() throws IsEmptyException {
+    public void mostrarDevelopers(){
         controlador.showDevelopers();
     }
-    public void modificarDeveloper(Scanner input) throws UserNotFound {
+    public void modificarDeveloper(Scanner input){
         controlador.modificarDeveloper(input);
     }
 }

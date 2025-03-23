@@ -9,7 +9,7 @@ import java.util.Scanner;
 
 public class App {
 
-    public static void __init(DeveloperView developerView, DesignerView designerView) throws IsEmptyException, UserAlreadyCreated, emptyException, UserNotFound {
+    public static void __init(DeveloperView developerView, DesignerView designerView){
         Scanner input = new Scanner(System.in);
         int salir;
         int opcion;

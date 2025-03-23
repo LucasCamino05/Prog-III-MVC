@@ -11,7 +11,7 @@ import view.DeveloperView;
 
 
 public class Main {
-    public static void main(String[] args) throws UserNotFound, IsEmptyException, UserAlreadyCreated, emptyException {
+    public static void main(String[] args){
         DeveloperRepository developerRepository = new DeveloperRepository();
         DeveloperView developerView = new DeveloperView(new DeveloperController(developerRepository));
         DesignerRepository designerRepository = new DesignerRepository();
