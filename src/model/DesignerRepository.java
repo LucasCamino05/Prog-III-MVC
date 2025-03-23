@@ -11,14 +11,19 @@ import java.util.Scanner;
 public class DesignerRepository {
     List<Designer> designers = new ArrayList<>();
 
-    public void guardarRepositorio(Designer o) throws UserAlreadyCreated {
-        if(designers.contains(o)){
-            throw new UserAlreadyCreated();
+    public void guardarRepositorio(Designer o){
+        try {
+            if (designers.contains(o)) {
+                throw new UserAlreadyCreated();
+            }
+            designers.add(o);
+        }catch (UserAlreadyCreated e){
+            e.printStackTrace();
         }
-        designers.add(o);
     }
 
-    public void remove(int id) throws UserNotFound{
+
+    public void remove(int id){
         int index = findIndexById(id);
         designers.remove(index);
     }
@@ -26,27 +31,37 @@ public class DesignerRepository {
         designers.remove(o);
     }
 
-    public int modifyDeveloper(Scanner input) throws UserNotFound{
+    public int modifyDeveloper(Scanner input){
         Integer value = input.nextInt();
         input.nextLine();
 
-        for(Designer i: designers){
-            if(i.getId() == value){
-                i.setEdad(modifyEdad(input));
-                input.nextLine();
-                i.setNombre(modifyName(input));
-                return 1;
+        try{
+            for (Designer i : designers) {
+                if (i.getId() == value) {
+                    i.setEdad(modifyEdad(input));
+                    input.nextLine();
+                    i.setNombre(modifyName(input));
+                    return 1;
+                }
             }
+            throw new UserNotFound();
         }
-
-        throw new UserNotFound();
+        catch (UserNotFound e){
+            e.printStackTrace();
+        }
+        return 0;
     }
-    public void showDesigners() throws IsEmptyException {
-        if(designers.isEmpty()){
-            throw new IsEmptyException();
-        }
-        for(Designer i : designers){
-            System.out.println(i.toString());
+
+    public void showDesigners(){
+        try {
+            if (designers.isEmpty()) {
+                throw new IsEmptyException();
+            }
+            for (Designer i : designers) {
+                System.out.println(i.toString());
+            }
+        }catch (IsEmptyException e){
+            e.printStackTrace();
         }
     }
 

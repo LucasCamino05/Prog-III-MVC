@@ -10,14 +10,18 @@ import java.util.Scanner;
 public class DeveloperRepository {
     List<Developer> developers = new ArrayList<>();
 
-    public void guardarRepositorio(Developer o) throws UserAlreadyCreated{
-        if(developers.contains(o)){
-            throw new UserAlreadyCreated();
+    public void guardarRepositorio(Developer o){
+        try {
+            if (developers.contains(o)) {
+                throw new UserAlreadyCreated();
+            }
+            developers.add(o);
+        }catch (UserAlreadyCreated e){
+            e.printStackTrace();
         }
-        developers.add(o);
     }
 
-    public void remove(int id) throws UserNotFound{
+    public void remove(int id){
         int index = findIndexById(id);
         developers.remove(index);
     }
@@ -25,27 +29,37 @@ public class DeveloperRepository {
         developers.remove(o);
     }
 
-    public int modifyDeveloper(Scanner input) throws UserNotFound{
+    public int modifyDeveloper(Scanner input) {
         Integer value = input.nextInt();
         input.nextLine();
-
-        for(Developer i: developers){
-            if(i.getId() == value){
-                i.setEdad(modifyEdad(input));
-                input.nextLine();
-                i.setNombre(modifyName(input));
-                return 1;
+        try {
+            for (Developer i : developers) {
+                if (i.getId() == value) {
+                    i.setEdad(modifyEdad(input));
+                    input.nextLine();
+                    i.setNombre(modifyName(input));
+                    return 1;
+                }
             }
+            throw new UserNotFound();
+        }catch (UserNotFound e){
+            e.printStackTrace();
         }
-        throw new UserNotFound();
+        return 0;
     }
-    public void showDevelopers() throws IsEmptyException {
-        if(developers.isEmpty()){
-            throw new IsEmptyException();
+
+    public void showDevelopers() {
+        try {
+            if(developers.isEmpty()){
+                throw new IsEmptyException();
+            }
+            for(Developer i : developers){
+                System.out.println(i.toString());
+            }
+        }catch (IsEmptyException e){
+            e.printStackTrace();
         }
-        for(Developer i : developers){
-            System.out.println(i.toString());
-        }
+
     }
 
     public String modifyName(Scanner input){

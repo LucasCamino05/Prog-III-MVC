@@ -23,9 +23,13 @@ public class DesignerController {
         repository.guardarRepositorio(designer);
     }
 
-    public void validarNombreVacio(String name) throws emptyException{
-        if(name.trim().isEmpty()){
-            throw new emptyException("El nombre no puede estar vacio");
+    public void validarNombreVacio(String name){
+        try {
+            if (name.trim().isEmpty()) {
+                throw new emptyException("El nombre no puede estar vacio");
+            }
+        }catch (emptyException e){
+            e.printStackTrace();
         }
     }
     public void showDesigners() throws IsEmptyException {

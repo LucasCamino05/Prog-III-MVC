@@ -16,15 +16,19 @@ public class DeveloperController {
         this.repository = repo;
     }
 
-    public void addDeveloper(String nombre, Integer edad, String DNI) throws emptyException,UserAlreadyCreated {
-        validarDeveloperData(nombre);
+    public void addDeveloper(String nombre, Integer edad, String DNI) throws UserAlreadyCreated {
+        validarNombreVacio(nombre);
         Developer developer = new Developer(nombre,edad,DNI);
         repository.guardarRepositorio(developer);
     }
 
-    public void validarDeveloperData(String name) throws emptyException {
-        if(name.trim().isEmpty()){
-            throw new emptyException("El nombre no puede estar vacio");
+    public void validarNombreVacio(String name){
+        try {
+            if (name.trim().isEmpty()) {
+                throw new emptyException("El nombre no puede estar vacio");
+            }
+        }catch (emptyException e){
+            e.printStackTrace();
         }
     }
     public void showDevelopers()throws IsEmptyException{
