@@ -1,10 +1,9 @@
 package controller;
 
 import exceptions.EmptyException;
+import exceptions.UserNotFound;
 import model.Designer;
 import model.DesignerRepository;
-
-import java.util.Scanner;
 
 public class DesignerController {
 
@@ -15,24 +14,65 @@ public class DesignerController {
     }
 
     public void addDesigner(String nombre,Integer edad, String DNI){
-        validarNombreVacio(nombre);
-        Designer designer = new Designer(nombre,edad,DNI);
-        repository.guardarRepositorio(designer);
-    }
-
-    public void validarNombreVacio(String name){
         try {
-            if (name.trim().isEmpty()) {
-                throw new EmptyException("El nombre no puede estar vacio");
-            }
-        }catch (EmptyException e){
+            validarVacio(nombre);
+            Designer designer = new Designer(nombre, edad, DNI);
+            repository.guardarRepositorio(designer);
+        } catch (EmptyException e) {
             e.printStackTrace();
         }
     }
+
+    private void validarVacio(String name) throws EmptyException {
+        if (name.trim().isEmpty()) {
+            throw new EmptyException("Este campo no puede estar vacio");
+        }
+    }
+
     public void showDesigners(){
         repository.showDesigners();
     }
-    public void modifyDesigner(Scanner input,String DNI){
-        repository.modifyDesigner(input,DNI);
+
+    public void removeDesigner(String DNI){
+        try{
+            validarVacio(DNI);
+            repository.removeDesigner(DNI);
+        }catch (UserNotFound e){
+            e.printStackTrace();
+        }
+        catch (EmptyException e) {
+            e.printStackTrace();
+        }
     }
+
+    public void modifyDesigner(String DNI,String nombre){
+        try{
+            validarVacio(nombre);
+            repository.modifyDesigner(DNI,nombre);
+        }catch (EmptyException e){
+            e.printStackTrace();
+        }
+        catch (UserNotFound e){
+            e.printStackTrace();
+        }
+    }
+    public void modifyDesigner(String DNI,Integer edad){
+        try {
+            repository.modifyDesigner(DNI, edad);
+        }catch (UserNotFound e){
+            e.printStackTrace();
+        }
+    }
+    public void modifyDesigner(String DNI,String nombre,Integer edad){
+        try{
+            validarVacio(nombre);
+            repository.modifyDesigner(DNI,nombre,edad);
+        }catch (UserNotFound e){
+            e.printStackTrace();
+        }
+        catch (EmptyException e){
+            e.printStackTrace();
+        }
+    }
+
 }

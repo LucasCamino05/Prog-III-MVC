@@ -1,6 +1,7 @@
 package view;
 
 import controller.DeveloperController;
+import exceptions.EmptyException;
 import exceptions.UserNotFound;
 
 import java.util.Scanner;
@@ -19,6 +20,14 @@ public class DeveloperView {
         String DNI = enterDNI();
 
         controlador.addDeveloper(nombre,edad,DNI);
+    }
+    public void removeUser(){
+        try {
+            String DNI = enterDNI();
+            controlador.removeController(DNI);
+        }catch (EmptyException e){
+            e.printStackTrace();
+        }
     }
     public void mostrarDevelopers(){
         controlador.showDevelopers();

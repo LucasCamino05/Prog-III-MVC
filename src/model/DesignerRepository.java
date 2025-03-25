@@ -22,33 +22,6 @@ public class DesignerRepository {
         }
     }
 
-
-    public void remove(int id){
-        int index = findIndexById(id);
-        designers.remove(index);
-    }
-    public void remove(Designer o){
-        designers.remove(o);
-    }
-
-    public int modifyDesigner(Scanner input,String DNI){
-        try{
-            for (Designer i : designers) {
-                if (i.getDNI().compareTo(DNI) == 0) {
-                    i.setEdad(modifyEdad(input));
-                    input.nextLine();
-                    i.setNombre(modifyName(input));
-                    return 1;
-                }
-            }
-            throw new UserNotFound();
-        }
-        catch (UserNotFound e){
-            e.printStackTrace();
-        }
-        return 0;
-    }
-
     public void showDesigners(){
         try {
             if (designers.isEmpty()) {
@@ -62,20 +35,42 @@ public class DesignerRepository {
         }
     }
 
-    public String modifyName(Scanner input){
-        System.out.println("Ingrese el nuevo nombre: ");
-        return input.nextLine();
+    public void removeDesigner(String DNI) throws UserNotFound{
+        int index = findIndexById(DNI);
+        if(index != -1){
+            designers.remove(index);
+        }
+        throw new UserNotFound();
+    }
+    public void modifyDesigner(String DNI,String nombre) throws UserNotFound{
+        int index = findIndexById(DNI);
+        if(index != -1){
+            designers.get(index).setNombre(nombre);
+        }
+        throw new UserNotFound();
     }
 
-    public int modifyEdad(Scanner input){
-        System.out.println("Ingrese la Edad: ");
-        int value = input.nextInt();
-        return value;
+    public void modifyDesigner(String DNI,Integer edad) throws UserNotFound{
+        int index = findIndexById(DNI);
+        if(index != -1){
+            designers.get(index).setEdad(edad);
+        }
+        throw new UserNotFound();
     }
 
-    public int findIndexById(int id){
+    public void modifyDesigner(String DNI,String nombre,Integer edad) throws UserNotFound{
+        int index = findIndexById(DNI);
+        if(index != -1){
+            designers.get(index).setNombre(nombre);
+            designers.get(index).setEdad(edad);
+        }
+        throw new UserNotFound();
+    }
+
+    // Busco el INDEX del DNI que quiero eliminar.
+    public int findIndexById(String DNI){
         for (int i=0; i<designers.size(); i++){
-            if(designers.get(i).getId() == id){
+            if(designers.get(i).getDNI().compareTo(DNI) == 0){
                 return i;
             }
         }

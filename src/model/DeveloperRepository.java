@@ -20,14 +20,12 @@ public class DeveloperRepository {
         }
     }
 
-    public void removeRepository(String DNi){
+    public void removeRepository(String DNi) throws UserNotFound{
         int index = findIndexById(DNi);
-        if(index == -1){
-            System.out.println("Usuario inexistente.");
-        }
-        else{
+        if(index != -1){
             developers.remove(index);
         }
+        throw new UserNotFound();
     }
 
     public void modifyDeveloper(String DNI,String nombre) throws UserNotFound{
@@ -54,6 +52,7 @@ public class DeveloperRepository {
         }
         throw new UserNotFound();
     }
+
     public void showDevelopers() throws IsEmptyException{
         if(developers.isEmpty()){
             throw new IsEmptyException();

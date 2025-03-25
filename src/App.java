@@ -26,7 +26,6 @@ public class App {
                         }
                         break;
                     case 2: //  Mostrar listados
-
                         opcion = subMenu(input);
                         switch (opcion) {
                             case 1:
@@ -46,14 +45,13 @@ public class App {
                         designerView.mostrarDesigners();
                         break;
                     case 4:
-
                         opcion = subMenu(input);
                         switch (opcion) {
                             case 1:
                                 developerView.modificarDeveloper(subMenuModificar(input));
                                 break;
                             case 2:
-                                designerView.modificarDesigner(input);
+                                designerView.modificarDesigner(subMenuModificar(input));
                                 break;
                         }
                         break;
@@ -61,10 +59,10 @@ public class App {
                         opcion = subMenu(input);
                         switch (opcion) {
                             case 1:
-
+                                developerView.removeUser();
                                 break;
                             case 2:
-
+                                designerView.removeUser();
                                 break;
                         }
                         break;
@@ -76,14 +74,14 @@ public class App {
     }
 
     public static int Menu(Scanner input) throws OpcionIncorrecta {
-
         System.out.println("----- Bienvenido -----");
         System.out.println("1 - Agregar nuevo usuario.");
         System.out.println("2 - Mostrar lista.");
         System.out.println("3 - Mostrar ambas listas.");
         System.out.println("4 - Modificar un usuario.");
-        System.out.println("5 - Agregar proyecto.");
-        System.out.println("6 - Salir.");
+        System.out.println("5 - Eliminar un usuario.");
+        System.out.println("6 - Agregar proyecto.");
+        System.out.println("7 - Salir.");
         int opcion = input.nextInt();
         if (opcion <= 6 && opcion >= 1) {
             input.nextLine();
@@ -92,6 +90,7 @@ public class App {
         throw new OpcionIncorrecta("Valor incorrecto intente nuevamente.");
     }
 
+    // Menu para elegir si designer o developer.
     public static int subMenu(Scanner input) throws OpcionIncorrecta {
         System.out.println("----- Que desea añadir -----");
         System.out.println("1 - Developer.");
@@ -105,6 +104,7 @@ public class App {
         throw new OpcionIncorrecta("Valor incorrecto intente nuevamente.");
     }
 
+    // Menu para opciones de cambio de designer o developer.
     public static int subMenuModificar(Scanner input) throws OpcionIncorrecta {
         System.out.println("----- Que desea añadir -----");
         System.out.println("1 - Nombre.");

@@ -35,9 +35,9 @@ public class DeveloperController {
         }
     }
 
-    private void validarNombreVacio(String name) throws EmptyException {
+    private void validarVacio(String name) throws EmptyException {
         if (name.trim().isEmpty()) {
-            throw new EmptyException("El nombre no puede estar vacio");
+            throw new EmptyException("Este campo no puede estar vacio");
         }
     }
 
@@ -51,7 +51,7 @@ public class DeveloperController {
 
     public void modificarDeveloper(String DNI,String nombre){
         try{
-            validarNombreVacio(nombre);
+            validarVacio(nombre);
             repository.modifyDeveloper(DNI,nombre);
         }catch (EmptyException e){
             e.printStackTrace();
@@ -69,16 +69,25 @@ public class DeveloperController {
     }
     public void modificarDeveloper(String DNI,String nombre,Integer edad){
         try{
-        repository.modifyDeveloper(DNI,nombre,edad);
+            validarVacio(nombre);
+            repository.modifyDeveloper(DNI,nombre,edad);
         }catch (UserNotFound e){
+            e.printStackTrace();
+        }
+        catch (EmptyException e){
             e.printStackTrace();
         }
     }
 
-
-
     public void removeController(String DNI){
-        repository.removeRepository(DNI);
+        try{
+            validarVacio(DNI);
+            repository.removeRepository(DNI);
+        }catch (UserNotFound e){
+            e.printStackTrace();
+        } catch (EmptyException e) {
+            e.printStackTrace();
+        }
     }
 
 }
