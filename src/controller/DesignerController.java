@@ -7,7 +7,7 @@ import model.DesignerRepository;
 
 public class DesignerController {
 
-    private DesignerRepository repository;
+    private final DesignerRepository repository;
 
     public DesignerController(DesignerRepository repo){
         this.repository = repo;
@@ -33,7 +33,7 @@ public class DesignerController {
         repository.showDesigners();
     }
 
-    public void removeDesigner(String DNI){
+    public void removeDesigner(String DNI) throws EmptyException{
         try{
             validarVacio(DNI);
             repository.removeDesigner(DNI);
@@ -74,5 +74,9 @@ public class DesignerController {
             e.printStackTrace();
         }
     }
-
+    public void buildNewProject(String projectName,String projectDescription, String DNI) throws EmptyException{
+        validarVacio(projectName);
+        validarVacio(DNI);
+        repository.buildNewProject(projectName,projectDescription,DNI);
+    }
 }

@@ -73,4 +73,8 @@ public class DeveloperRepository {
         }
         return -1;
     }
+    public void buildNewProject(String projectName,String projectDescription, String DNI){
+        int index = findIndexById(DNI);
+        developers.get(index).setProject(projectName,projectDescription);
+    }
 }

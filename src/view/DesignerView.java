@@ -2,13 +2,11 @@ package view;
 
 import controller.DesignerController;
 import exceptions.EmptyException;
-
-
 import java.util.Scanner;
 
 public class DesignerView {
-    private DesignerController controller;
-    private Scanner input;
+    private final DesignerController controller;
+    private final Scanner input;
 
     public DesignerView(DesignerController controller){
         this.controller = controller;
@@ -33,7 +31,7 @@ public class DesignerView {
     }
     public void removeUser(){
         try {
-            String DNI = enterDNI();
+            String DNI = enterString();
             controller.removeDesigner(DNI);
         }catch (EmptyException e){
             e.printStackTrace();
@@ -41,36 +39,42 @@ public class DesignerView {
     }
     public void modificarDesigner(int opcion){
         System.out.println("Ingrese el DNI: ");
-        String DNI = enterDNI();
+        String DNI = enterString();
 
         if (opcion == 1) {
-            String nombre = enterName();
+            String nombre = enterString();
             controller.modifyDesigner(DNI, nombre);
         } else if (opcion == 2) {
-            Integer edad = enterAge();
+            Integer edad = enterInt();
             controller.modifyDesigner(DNI, edad);
         } else {
-            String nombre = enterName();
-            Integer edad = enterAge();
+            String nombre = enterString();
+            Integer edad = enterInt();
             controller.modifyDesigner(DNI, nombre, edad);
         }
     }
 
-    public String enterName(){
-        System.out.println("Ingrese el nuevo nombre: ");
+    public String enterString(){
+        System.out.println("Ingrese un texto: ");
         return input.nextLine();
     }
 
-    public String enterDNI(){
-        System.out.println("Ingrese el DNI del usuario: ");
-        return input.nextLine();
-    }
-
-    public int enterAge(){
-        System.out.println("Ingrese la Edad: ");
+    public int enterInt(){
+        System.out.println("Ingrese un entero: ");
         int value = input.nextInt();
         input.nextLine();
 
         return value;
     }
+    public void buildNewProject(){
+        try {
+            String projectName = input.nextLine();
+            String projectDescription = input.nextLine();
+            String DNI = input.nextLine();
+            controller.buildNewProject(projectName,projectDescription,DNI);
+        }catch(EmptyException e){
+            e.printStackTrace();
+        }
+    }
+
 }

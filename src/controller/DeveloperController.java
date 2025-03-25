@@ -9,7 +9,7 @@ import model.DeveloperRepository;
 
 
 public class DeveloperController {
-    private DeveloperRepository repository;
+    private final DeveloperRepository repository;
 
     public DeveloperController(DeveloperRepository repo){
         this.repository = repo;
@@ -79,7 +79,7 @@ public class DeveloperController {
         }
     }
 
-    public void removeController(String DNI){
+    public void removeDeveloper(String DNI) throws EmptyException{
         try{
             validarVacio(DNI);
             repository.removeRepository(DNI);
@@ -90,4 +90,9 @@ public class DeveloperController {
         }
     }
 
+    public void buildNewProject(String projectName,String projectDescription, String DNI) throws EmptyException{
+        validarVacio(projectName);
+        validarVacio(DNI);
+        repository.buildNewProject(projectName,projectDescription,DNI);
+    }
 }

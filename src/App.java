@@ -1,7 +1,6 @@
 import exceptions.OpcionIncorrecta;
 import view.DesignerView;
 import view.DeveloperView;
-
 import java.util.Scanner;
 
 public class App {
@@ -66,11 +65,22 @@ public class App {
                                 break;
                         }
                         break;
+                    case 6:
+                        opcion = subMenu(input);
+                        switch (opcion){
+                            case 1:
+                                developerView.buildNewProject();
+                                break;
+                            case 2:
+                                designerView.buildNewProject();
+                                break;
+                        }
+                        break;
                 }
             } catch (OpcionIncorrecta e) {
                 e.printStackTrace();
             }
-        } while (opcion != 6);
+        } while (opcion != 10);
     }
 
     public static int Menu(Scanner input) throws OpcionIncorrecta {
@@ -81,9 +91,10 @@ public class App {
         System.out.println("4 - Modificar un usuario.");
         System.out.println("5 - Eliminar un usuario.");
         System.out.println("6 - Agregar proyecto.");
-        System.out.println("7 - Salir.");
+
+        System.out.println("10 - Salir.");
         int opcion = input.nextInt();
-        if (opcion <= 6 && opcion >= 1) {
+        if (opcion <= 10 && opcion >= 1) {
             input.nextLine();
             return opcion;
         }

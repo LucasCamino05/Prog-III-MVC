@@ -3,10 +3,8 @@ package model;
 import exceptions.IsEmptyException;
 import exceptions.UserAlreadyCreated;
 import exceptions.UserNotFound;
-
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
 public class DesignerRepository {
     List<Designer> designers = new ArrayList<>();
@@ -66,7 +64,6 @@ public class DesignerRepository {
         }
         throw new UserNotFound();
     }
-
     // Busco el INDEX del DNI que quiero eliminar.
     public int findIndexById(String DNI){
         for (int i=0; i<designers.size(); i++){
@@ -75,5 +72,10 @@ public class DesignerRepository {
             }
         }
         return -1;
+    }
+
+    public void buildNewProject(String projectName,String projectDescription, String DNI){
+        int index = findIndexById(DNI);
+        designers.get(index).setProject(projectName,projectDescription);
     }
 }
