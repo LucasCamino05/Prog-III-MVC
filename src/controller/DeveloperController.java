@@ -11,20 +11,7 @@ import model.DeveloperRepository;
 public class DeveloperController {
     private final DeveloperRepository repository;
 
-    public DeveloperController(DeveloperRepository repo){
-        this.repository = repo;
-    }
-
-    public void addDeveloper(String nombre, Integer edad, String DNI){
-        try {
-            validarVacio(nombre,DNI);
-        }
-        catch (EmptyException e){
-            e.printStackTrace();
-        }
-        Developer developer = new Developer(nombre,edad,DNI);
-        repository.guardarRepositorio(developer);
-    }
+    /** Validadores **/
 
     private void validarVacio(String name, String DNI) throws EmptyException {
         if (name.trim().isEmpty()) {
@@ -39,6 +26,23 @@ public class DeveloperController {
         if (name.trim().isEmpty()) {
             throw new EmptyException("Este campo no puede estar vacio");
         }
+    }
+
+    /* Controllers de developers */
+
+    public DeveloperController(DeveloperRepository repo){
+        this.repository = repo;
+    }
+
+    public void addDeveloper(String nombre, Integer edad, String DNI){
+        try {
+            validarVacio(nombre,DNI);
+        }
+        catch (EmptyException e){
+            e.printStackTrace();
+        }
+        Developer developer = new Developer(nombre,edad,DNI);
+        repository.guardarRepositorio(developer);
     }
 
     public void showDevelopers(){
@@ -90,9 +94,24 @@ public class DeveloperController {
         }
     }
 
+    /* Controllers de proyecto */
+
     public void buildNewProject(String projectName,String projectDescription, String DNI) throws EmptyException{
         validarVacio(projectName);
         validarVacio(DNI);
         repository.buildNewProject(projectName,projectDescription,DNI);
+    }
+    public void modifyProjectController(String projectName, String projectDescription, String DNI) throws EmptyException{
+        validarVacio(projectName);
+        validarVacio(DNI);
+        repository.modifyProjectRepository(projectName, projectDescription,DNI);
+    }
+    public void showProjectController(String DNI) throws EmptyException{
+        validarVacio(DNI);
+        repository.showProject(DNI);
+    }
+    public void eliminarProjectController(String DNI) throws EmptyException{
+        validarVacio(DNI);
+        repository.eliminarProject(DNI);
     }
 }

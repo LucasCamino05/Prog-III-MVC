@@ -9,6 +9,15 @@ public class DesignerController {
 
     private final DesignerRepository repository;
 
+    /* Validadores */
+
+    private void validarVacio(String name) throws EmptyException {
+        if (name.trim().isEmpty()) {
+            throw new EmptyException("Este campo no puede estar vacio");
+        }
+    }
+
+    /* Controllers designer */
     public DesignerController(DesignerRepository repo){
         this.repository = repo;
     }
@@ -23,11 +32,6 @@ public class DesignerController {
         }
     }
 
-    private void validarVacio(String name) throws EmptyException {
-        if (name.trim().isEmpty()) {
-            throw new EmptyException("Este campo no puede estar vacio");
-        }
-    }
 
     public void showDesigners(){
         repository.showDesigners();
@@ -74,9 +78,26 @@ public class DesignerController {
             e.printStackTrace();
         }
     }
+
+    /* Controllers proyecto designer */
+
     public void buildNewProject(String projectName,String projectDescription, String DNI) throws EmptyException{
         validarVacio(projectName);
         validarVacio(DNI);
         repository.buildNewProject(projectName,projectDescription,DNI);
+    }
+    public void modifyProjectController(String projectName, String projectDescription, String DNI) throws EmptyException{
+        validarVacio(projectName);
+        validarVacio(DNI);
+        repository.modifyProjectRepository(projectName, projectDescription,DNI);
+    }
+    public void showProjectController(String DNI) throws EmptyException{
+        validarVacio(DNI);
+        repository.showProject(DNI);
+    }
+
+    public void eliminarProjectController(String DNI) throws EmptyException{
+        validarVacio(DNI);
+        repository.eliminarProject(DNI);
     }
 }

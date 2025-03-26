@@ -8,6 +8,18 @@ import java.util.List;
 
 public class DesignerRepository {
     List<Designer> designers = new ArrayList<>();
+    /* Funcionalidades */
+    // Busco el INDEX del DNI que quiero eliminar.
+    public int findIndexById(String DNI){
+        for (int i=0; i<designers.size(); i++){
+            if(designers.get(i).getDNI().compareTo(DNI) == 0){
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    /* Repository funciones */
 
     public void guardarRepositorio(Designer o){
         try {
@@ -64,18 +76,23 @@ public class DesignerRepository {
         }
         throw new UserNotFound();
     }
-    // Busco el INDEX del DNI que quiero eliminar.
-    public int findIndexById(String DNI){
-        for (int i=0; i<designers.size(); i++){
-            if(designers.get(i).getDNI().compareTo(DNI) == 0){
-                return i;
-            }
-        }
-        return -1;
-    }
+
+    /* Repository proyecto */
 
     public void buildNewProject(String projectName,String projectDescription, String DNI){
         int index = findIndexById(DNI);
         designers.get(index).setProject(projectName,projectDescription);
+    }
+    public void modifyProjectRepository(String projectName, String projectDescription, String DNI){
+        int index = findIndexById(DNI);
+        designers.get(index).setProject(projectName, projectDescription);
+    }
+    public void showProject(String DNI){
+        int index = findIndexById(DNI);
+        designers.get(index).getProject();
+    }
+    public void eliminarProject(String DNI){
+        int index = findIndexById(DNI);
+        designers.get(index).setProject("No pertenece a ningun proyecto",null);
     }
 }

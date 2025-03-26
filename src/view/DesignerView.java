@@ -8,21 +8,42 @@ public class DesignerView {
     private final DesignerController controller;
     private final Scanner input;
 
+    /* FUNCIONES PARA PEDIR DATOS */
+
+    public String enterNombre(){
+        System.out.println("Ingrese Nombre: ");
+        return input.nextLine();
+    }
+
+    public String enterDNI(){
+        System.out.println("Ingrese DNI: ");
+        return input.nextLine();
+    }
+
+    public String enterString(){
+        System.out.println("Ingrese: ");
+        return input.nextLine();
+    }
+
+    public int enterEdad(){
+        System.out.println("Ingrese Edad: ");
+        int value = input.nextInt();
+        input.nextLine();
+
+        return value;
+    }
+
+    /* Funciones de designers */
+
     public DesignerView(DesignerController controller){
         this.controller = controller;
         this.input = new Scanner(System.in);
     }
 
     public void crearNuevoUsuario(){
-        System.out.println("Ingrese el nombre del nuevo usuario: ");
-        String nombre = input.nextLine();
-
-        System.out.println("Ingrese la edad: ");
-        Integer edad = input.nextInt();
-        input.nextLine();
-
-        System.out.println("Ingrese el DNI del usuario: ");
-        String DNI = input.nextLine();
+        String nombre = enterNombre();
+        Integer edad = enterEdad();
+        String DNI = enterDNI();
 
         controller.addDesigner(nombre,edad,DNI);
     }
@@ -31,7 +52,7 @@ public class DesignerView {
     }
     public void removeUser(){
         try {
-            String DNI = enterString();
+            String DNI = enterDNI();
             controller.removeDesigner(DNI);
         }catch (EmptyException e){
             e.printStackTrace();
@@ -39,42 +60,58 @@ public class DesignerView {
     }
     public void modificarDesigner(int opcion){
         System.out.println("Ingrese el DNI: ");
-        String DNI = enterString();
+        String DNI = enterDNI();
 
         if (opcion == 1) {
-            String nombre = enterString();
+            String nombre = enterNombre();
             controller.modifyDesigner(DNI, nombre);
         } else if (opcion == 2) {
-            Integer edad = enterInt();
+            Integer edad = enterEdad();
             controller.modifyDesigner(DNI, edad);
         } else {
-            String nombre = enterString();
-            Integer edad = enterInt();
+            String nombre = enterNombre();
+            Integer edad = enterEdad();
             controller.modifyDesigner(DNI, nombre, edad);
         }
     }
 
-    public String enterString(){
-        System.out.println("Ingrese un texto: ");
-        return input.nextLine();
-    }
 
-    public int enterInt(){
-        System.out.println("Ingrese un entero: ");
-        int value = input.nextInt();
-        input.nextLine();
+    /* Funciones de proyecto */
 
-        return value;
-    }
     public void buildNewProject(){
         try {
-            String projectName = input.nextLine();
-            String projectDescription = input.nextLine();
-            String DNI = input.nextLine();
+            String projectName = enterNombre();
+            String projectDescription = enterString();
+            String DNI = enterDNI();
             controller.buildNewProject(projectName,projectDescription,DNI);
         }catch(EmptyException e){
             e.printStackTrace();
         }
     }
-
+    public void modifyProjectView(){
+        try{
+            String projectName = enterNombre();
+            String projectDescription = enterString();
+            String DNI = enterDNI();
+            controller.modifyProjectController(projectName, projectDescription,DNI);
+        }catch(EmptyException e){
+            e.printStackTrace();
+        }
+    }
+    public void showProjectView(){
+        try{
+            String DNI = enterDNI();
+            controller.showProjectController(DNI);
+        }catch(EmptyException e){
+            e.printStackTrace();
+        }
+    }
+    public void eliminarProjectView(){
+        try{
+            String DNI = enterDNI();
+            controller.eliminarProjectController(DNI);
+        }catch(EmptyException e){
+            e.printStackTrace();
+        }
+    }
 }

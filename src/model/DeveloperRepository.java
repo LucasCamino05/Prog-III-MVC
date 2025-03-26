@@ -9,6 +9,20 @@ import java.util.List;
 public class DeveloperRepository {
     List<Developer> developers = new ArrayList<>();
 
+    /* Funcionalidad del repository */
+
+    // Busco el INDEX del DNI que quiero eliminar.
+    public int findIndexById(String DNI){
+        for (int i=0; i<developers.size(); i++){
+            if(developers.get(i).getDNI().compareTo(DNI) == 0){
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    /* Funciones del Repository de developers */
+
     public void guardarRepositorio(Developer o){
         try {
             if (developers.contains(o)) {
@@ -64,17 +78,24 @@ public class DeveloperRepository {
         }
     }
 
-    // Busco el INDEX del DNI que quiero eliminar.
-    public int findIndexById(String DNI){
-        for (int i=0; i<developers.size(); i++){
-            if(developers.get(i).getDNI().compareTo(DNI) == 0){
-                return i;
-            }
-        }
-        return -1;
-    }
+    /* Projects Repository funciones */
+
     public void buildNewProject(String projectName,String projectDescription, String DNI){
         int index = findIndexById(DNI);
         developers.get(index).setProject(projectName,projectDescription);
+    }
+
+    public void modifyProjectRepository(String projectName, String projectDescription, String DNI){
+        int index = findIndexById(DNI);
+        developers.get(index).setProject(projectName, projectDescription);
+    }
+
+    public void showProject(String DNI){
+        int index = findIndexById(DNI);
+        developers.get(index).getProject();
+    }
+    public void eliminarProject(String DNI){
+        int index = findIndexById(DNI);
+        developers.get(index).setProject("No pertenece a ningun proyecto",null);
     }
 }

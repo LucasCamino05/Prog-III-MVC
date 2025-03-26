@@ -76,6 +76,39 @@ public class App {
                                 break;
                         }
                         break;
+                    case 7:
+                        opcion = subMenu(input);
+                        switch (opcion){
+                            case 1:
+                                developerView.modifyProjectView();
+                                break;
+                            case 2:
+                                designerView.modifyProjectView();
+                                break;
+                        }
+                        break;
+                    case 8:
+                        opcion = subMenu(input);
+                        switch (opcion){
+                            case 1:
+                                developerView.showProjectView();
+                                break;
+                            case 2:
+                                designerView.showProjectView();
+                                break;
+                        }
+                        break;
+                    case 9:
+                        opcion = subMenu(input);
+                        switch (opcion){
+                            case 1:
+                                developerView.eliminarProjectView();
+                                break;
+                            case 2:
+                                designerView.eliminarProjectView();
+                                break;
+                        }
+                        break;
                 }
             } catch (OpcionIncorrecta e) {
                 e.printStackTrace();
@@ -91,7 +124,9 @@ public class App {
         System.out.println("4 - Modificar un usuario.");
         System.out.println("5 - Eliminar un usuario.");
         System.out.println("6 - Agregar proyecto.");
-
+        System.out.println("7 - Modificar proyecto.");
+        System.out.println("8 - Mostrar proyecto.");
+        System.out.println("9 - Eliminar proyecto.");
         System.out.println("10 - Salir.");
         int opcion = input.nextInt();
         if (opcion <= 10 && opcion >= 1) {
